@@ -26,17 +26,22 @@ public class Person {
         return this.number;
     }
 
-    public void setFirstName(){
+    public void setFirstName(String firstName){
         this.firstName = firstName;
     }
-    public void setLastName(){
+    public void setLastName(String firstName){
         this.lastName = lastName;
     }
-    public void setEmail(){
+    public void setEmail(String email){
         this.email = email;
     }
-    public  void setNumber(){
+    public  void setNumber(String number){
         this.number = number;
+    }
+
+    @Override
+    public String toString(){
+        return this.firstName + " " + this.lastName + ", " + "email: " + this.email + ", phone: " + this.number;
     }
 
 }
