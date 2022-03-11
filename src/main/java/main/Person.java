@@ -96,7 +96,28 @@ public class Person {
         Person person = new Person(firstName, lastName, phone, mail);
 
         arr.add(person);
+
+        input.close();
     }
 
+    private void listPerson(){
+        for(int i = 0; i <= arr.size(); i++){
+            System.out.println(arr.indexOf(arr.get(i)) + ": " + arr.get(i).hashCode());
+        }
+    }
 
+    private void deletePerson(){
+        Scanner input = new Scanner(System.in);
+        int index;
+        listPerson();
+        System.out.print("Index of person's record: ");
+        try {
+            index = input.nextInt();
+            arr.remove(index);
+        }
+        catch (InputMismatchException e){
+            System.out.println("Input is not an integer");
+            deletePerson();
+        }
+    }
 }
