@@ -4,7 +4,7 @@ public enum menuOptions {
 
     a("Browse person entries"),
     b("Toggle filtering person entries"),
-    c("Delete person entry"),
+    c("Create person entry"),
     d("Delete person entry"),
     e("Exit");
 
