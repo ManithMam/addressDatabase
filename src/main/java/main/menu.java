@@ -36,12 +36,12 @@ public class menu {
             case 1:
                 break;
             case 2:
-                Person x = createPerson();
+                Person x = createPerson(input);
                 arr.add(x);
                 ui();
                 break;
             case 3:
-                arr.remove(deletePerson());
+                arr.remove(deletePerson(input));
                 ui();
             case 4:
                 System.out.println("Bye!");
@@ -51,8 +51,9 @@ public class menu {
                 System.out.println("Choice not in range [0...4]");
                 ui();
         }
-        
+
         input.close();
+
     }
 
     private void addPerson(Person person){
@@ -65,8 +66,7 @@ public class menu {
         }
     }
 
-    private static Person createPerson(){
-        Scanner input = new Scanner(System.in);
+    private static Person createPerson(Scanner input){
 
         String firstName;
         String lastName;
@@ -111,26 +111,24 @@ public class menu {
 
         Person person = new Person(firstName, lastName, phone, mail);
 
-        input.close();
-
         return person;
 
     }
 
-    private int deletePerson(){
-        Scanner input = new Scanner(System.in);
+    private int deletePerson(Scanner input){
+
         int index;
         listPerson();
         System.out.print("Index of person's record: ");
         try {
             index = input.nextInt();
-            input.close();
+
             return index;
         }
         catch (InputMismatchException e){
             System.out.println("Input is not an integer");
-            deletePerson();
-            input.close();
+            deletePerson(input);
+
         }
         return 0;
     }
