@@ -72,7 +72,7 @@ public class menu {
             }
         }
         else{
-            System.out.println("Active filter: Last name matches " + filter);
+            System.out.println("Active filter: Last name matches: " + filter);
             for (int i = 0; i < arr.size(); i++) {
                 if(arr.get(i).getLastName().matches(filter)) {
                     System.out.println(arr.indexOf(arr.get(i)) + ": " + arr.get(i).toString());
@@ -88,51 +88,25 @@ public class menu {
         String mail;
         String phone;
 
-        try {
+
             System.out.print("First name: ");
             firstName = input.nextLine();
-        }
-        catch(InputMismatchException e){
-            int numeric = input.nextInt();
-            input.nextLine();
-            firstName = String.valueOf(numeric);
-        }
 
-        try {
             System.out.print("Last name: ");
             lastName = input.nextLine();
-        }
-        catch(InputMismatchException e){
-            int numeric = input.nextInt();
-            input.nextLine();
-            lastName = String.valueOf(numeric);
-        }
 
-        try {
             System.out.print("Optional input Email: ");
             mail = input.nextLine();
             if(mail.equals("")){
                 mail = "-";
             }
-        }
-        catch(InputMismatchException e){
-            int numeric = input.nextInt();
-            input.nextLine();
-            mail = String.valueOf(numeric);
-        }
 
-        try {
             System.out.print("Optional input phone: ");
             phone = input.nextLine();
             if(phone.equals("")){
                 phone = "-";
             }
-        }
-        catch(InputMismatchException e){
-            int numeric = input.nextInt();
-            input.nextLine();
-            phone = String.valueOf(numeric);
-        }
+
 
         Person person = new Person(firstName, lastName, mail, phone);
         return person;
