@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class menu {
 
-    private ArrayList<Person> arr = new ArrayList<Person>();
+    private final ArrayList<Person> arr = new ArrayList<>();
 
     public static final Scanner input = new Scanner(System.in);
 
@@ -69,10 +69,6 @@ public class menu {
 
     }
 
-    private void addPerson(Person person){
-        arr.add(person);
-    }
-
     private void listPerson(){
         if(!filterToggle) {
             for (int i = 0; i < arr.size(); i++) {
@@ -116,8 +112,7 @@ public class menu {
             }
 
 
-        Person person = new Person(firstName, lastName, mail, phone);
-        return person;
+        return new Person(firstName, lastName, mail, phone);
 
     }
 
@@ -143,16 +138,14 @@ public class menu {
         return 0;
     }
 
-    private String filterPerson(){
+    private void filterPerson(){
         if(!filterToggle) {
             filterToggle = true;
             System.out.print("Enter filter expression: ");
             filter = input.nextLine();
-            return filter;
         }
         else{
             filterToggle = false;
-            return "";
         }
     }
 

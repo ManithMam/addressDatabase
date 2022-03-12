@@ -8,9 +8,9 @@ public enum menuOptions {
     d("Delete person entry"),
     e("Exit");
 
-    String option;
+    final String option;
 
-    private menuOptions(final String option){
+    menuOptions(final String option){
         this.option = option;
     }
 
