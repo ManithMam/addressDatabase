@@ -8,6 +8,8 @@ public class menu {
 
     private ArrayList<Person> arr = new ArrayList<Person>();
 
+    public static final Scanner input = new Scanner(System.in);
+
     public void ui(){
         System.out.println("Main options:");
 
@@ -17,8 +19,6 @@ public class menu {
            System.out.println(test[i].ordinal() + ": " + test[i].option);
        }
 
-        Scanner input = new Scanner(System.in);
-
         System.out.print("Your choice: ");
 
         int in = input.nextInt();
@@ -26,25 +26,23 @@ public class menu {
         switch(in){
             case 0:
                 System.out.println("Current person records:");
-
-                //Anzeigen der Personen Objekte
                 listPerson();
-
                 System.out.println("----------------------------");
                 ui();
                 break;
             case 1:
                 break;
             case 2:
-                Person x = createPerson(input);
+                Person x = createPerson();
                 arr.add(x);
                 ui();
                 break;
             case 3:
-                arr.remove(deletePerson(input));
+                arr.remove(deletePerson());
                 ui();
             case 4:
                 System.out.println("Bye!");
+                input.close();
                 System.exit(0);
                 break;
             default:
@@ -61,12 +59,12 @@ public class menu {
     }
 
     private void listPerson(){
-        for(int i = 0; i <= arr.size(); i++){
+        for(int i = 0; i < arr.size(); i++){
             System.out.println(arr.indexOf(arr.get(i)) + ": " + arr.get(i).toString());
         }
     }
 
-    private static Person createPerson(Scanner input){
+    private static Person createPerson(){
 
         String firstName;
         String lastName;
@@ -75,7 +73,7 @@ public class menu {
 
         try {
             System.out.print("First name: ");
-            firstName = input.nextLine();
+            firstName = input.next();
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
@@ -84,7 +82,7 @@ public class menu {
 
         try {
             System.out.print("Last name: ");
-            lastName = input.nextLine();
+            lastName = input.next();
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
@@ -93,7 +91,7 @@ public class menu {
 
         try {
             System.out.print("Optional input Email: ");
-            mail = input.nextLine();
+            mail = input.next();
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
@@ -102,34 +100,31 @@ public class menu {
 
         try {
             System.out.print("Optional input phone: ");
-            phone = input.nextLine();
+            phone = input.next();
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
             phone = String.valueOf(numeric);
         }
 
-        Person person = new Person(firstName, lastName, phone, mail);
-
+        Person person = new Person(firstName, lastName, mail, phone);
         return person;
 
     }
 
-    private int deletePerson(Scanner input){
-
+    private int deletePerson(){
         int index;
         listPerson();
         System.out.print("Index of person's record: ");
         try {
             index = input.nextInt();
-
             return index;
         }
         catch (InputMismatchException e){
             System.out.println("Input is not an integer");
-            deletePerson(input);
-
+            deletePerson();
         }
+
         return 0;
     }
 }
