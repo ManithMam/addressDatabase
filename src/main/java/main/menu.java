@@ -45,7 +45,15 @@ public class menu {
                 ui();
                 break;
             case 3:
-                arr.remove(deletePerson());
+                try {
+                    arr.remove(deletePerson());
+                }
+                catch(IndexOutOfBoundsException ex){
+                    System.out.println("Input is not in range");
+                    System.out.println("Enter 0 - " + (arr.size()-1));
+                    arr.remove(deletePerson());
+                }
+
                 ui();
             case 4:
                 System.out.println("Bye!");
@@ -114,18 +122,24 @@ public class menu {
     }
 
     private int deletePerson(){
+        if(arr.size() == 0){
+            System.out.println("No Person to delete!");
+            ui();
+        }
         int index;
         listPerson();
         System.out.print("Index of person's record: ");
         try {
             index = input.nextInt();
+
             return index;
         }
         catch (InputMismatchException e){
             System.out.println("Input is not an integer");
+            System.out.println();
+            input.nextLine();
             deletePerson();
         }
-
         return 0;
     }
 
