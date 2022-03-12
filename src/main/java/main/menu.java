@@ -10,6 +10,10 @@ public class menu {
 
     public static final Scanner input = new Scanner(System.in);
 
+    private boolean filterToggle = false;
+
+    private String filter;
+
     public void ui(){
         System.out.println("Main options:");
 
@@ -22,6 +26,7 @@ public class menu {
         System.out.print("Your choice: ");
 
         int in = input.nextInt();
+        input.nextLine();
 
         switch(in){
             case 0:
@@ -31,6 +36,8 @@ public class menu {
                 ui();
                 break;
             case 1:
+                filterPerson();
+                ui();
                 break;
             case 2:
                 Person x = createPerson();
@@ -59,8 +66,18 @@ public class menu {
     }
 
     private void listPerson(){
-        for(int i = 0; i < arr.size(); i++){
-            System.out.println(arr.indexOf(arr.get(i)) + ": " + arr.get(i).toString());
+        if(!filterToggle) {
+            for (int i = 0; i < arr.size(); i++) {
+                System.out.println(arr.indexOf(arr.get(i)) + ": " + arr.get(i).toString());
+            }
+        }
+        else{
+            System.out.println("Active filter: Last name matches " + filter);
+            for (int i = 0; i < arr.size(); i++) {
+                if(arr.get(i).getLastName().matches(filter)) {
+                    System.out.println(arr.indexOf(arr.get(i)) + ": " + arr.get(i).toString());
+                }
+            }
         }
     }
 
@@ -73,37 +90,47 @@ public class menu {
 
         try {
             System.out.print("First name: ");
-            firstName = input.next();
+            firstName = input.nextLine();
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
+            input.nextLine();
             firstName = String.valueOf(numeric);
         }
 
         try {
             System.out.print("Last name: ");
-            lastName = input.next();
+            lastName = input.nextLine();
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
+            input.nextLine();
             lastName = String.valueOf(numeric);
         }
 
         try {
             System.out.print("Optional input Email: ");
-            mail = input.next();
+            mail = input.nextLine();
+            if(mail.equals("")){
+                mail = "-";
+            }
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
+            input.nextLine();
             mail = String.valueOf(numeric);
         }
 
         try {
             System.out.print("Optional input phone: ");
-            phone = input.next();
+            phone = input.nextLine();
+            if(phone.equals("")){
+                phone = "-";
+            }
         }
         catch(InputMismatchException e){
             int numeric = input.nextInt();
+            input.nextLine();
             phone = String.valueOf(numeric);
         }
 
@@ -127,4 +154,19 @@ public class menu {
 
         return 0;
     }
+
+    private String filterPerson(){
+        if(!filterToggle) {
+            filterToggle = true;
+            System.out.print("Enter filter expression: ");
+            filter = input.nextLine();
+            return filter;
+        }
+        else{
+            filterToggle = false;
+            return "";
+        }
+    }
+
+
 }
